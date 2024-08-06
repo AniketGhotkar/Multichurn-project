@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Churn Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px; /* Adjust according to your navbar height */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        footer p {
+            margin-bottom: 0;
+        }
+
+        footer a {
+            color: #fff;
+        }
+
+        footer a:hover {
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Starts -->
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand font-weight-bold" href="#" style="color: yellow;">Employee</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Predictions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <!-- Navbar Ends -->
+
+    <!-- <h1>Employee Churn Prediction</h1> -->
+    <form action="/employee_churn" method="POST">
+        <h1 class="text-center mt-4">Enter Information for Employee Churn Prediction</h1>
+        <div class="contentform">
+                <div class="form-group">
+                    <label for="satisfaction_level">Satisfaction Level</label>
+                    <input type="number" class="form-control" id="satisfaction_level" name="satisfaction_level" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_evaluation">Last Evaluation</label>
+                    <input type="number" class="form-control" id="last_evaluation" name="last_evaluation" required>
+                </div>
+                <div class="form-group">
+                    <label for="number_project">Number of Projects</label>
+                    <input type="number" class="form-control" id="number_project" name="number_project" required>
+                </div>
+                <div class="form-group">
+                    <label for="average_monthly_hours">Average Monthly Hours</label>
+                    <input type="number" class="form-control" id="average_monthly_hours" name="average_monthly_hours" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time_spend_company">Time Spent in Company</label>
+                    <input type="number" class="form-control" id="time_spend_company" name="time_spend_company" required>
+                </div>
+                <div class="form-group">
+                    <label for="work_accident">Work Accident (0 for No, 1 for Yes)</label>
+                    <input type="number" class="form-control" id="work_accident" name="work_accident" required>
+                </div>
+                <div class="form-group">
+                    <label for="promotion_last_5years">Promotion in Last 5 Years (0 for No, 1 for Yes)</label>
+                    <input type="number" class="form-control" id="promotion_last_5years" name="promotion_last_5years" required>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <select class="form-control" id="salary" name="salary" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg mt-3">Predict Employee Churn</button>
+    </form>
+
+    <div class="container mt-4">
+        <h3 class="alert alert-primary text-center" role="alert">{{ prediction_text }}</h3>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-4 py-3">
+        <div class="container text-center">
+            <p>Developed by Aniket Bhagyash Tejas</p>
+            <p>
+                <a href="#"><i class="fa fa-github fa-2x mx-2"></i></a>
+                <a href="#"><i class="fa fa-linkedin fa-2x mx-2"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+
+</html>
